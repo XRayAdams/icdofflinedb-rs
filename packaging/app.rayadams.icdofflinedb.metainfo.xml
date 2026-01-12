@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component type="desktop">
+  <id>icdofflinedb.desktop</id>
+  <metadata_license>CC0-1.0</metadata_license>
+  <name>ICD Offline Database</name>
+  <summary>ICD Offline Database is a free and open-source application that allows users to search through the entire ICD-10 and ICD-9 databases of codes.</summary>
+  <url type="homepage">https://github.com/XRayAdams/icdofflinedb</url>
+  <content_rating type="oars-1.1"><category>Age 3+</category></content_rating>
+  <screenshots>
+    <screenshot type="default">
+      <image>https://raw.githubusercontent.com/XRayAdams/icdofflinedb-rs/refs/heads/master/screenshots/screenshot01.png</image>
+      <caption>Main window UI</caption>
+    </screenshot>
+    <screenshot >
+      <image>https://raw.githubusercontent.com/XRayAdams/icdofflinedb-rs/refs/heads/master/screenshots/screenshot02.png</image>
+      <caption>Main window UI</caption>
+    </screenshot>
+    <screenshot >
+      <image>https://raw.githubusercontent.com/XRayAdams/icdofflinedb-rs/refs/heads/master/screenshots/screenshot03.png</image>
+      <caption>Main window UI</caption>
+    </screenshot>
+    <screenshot >
+      <image>https://raw.githubusercontent.com/XRayAdams/icdofflinedb-rs/refs/heads/master/screenshots/screenshot04.png</image>
+      <caption>Main window UI</caption>
+    </screenshot>
+  </screenshots>
+</component>

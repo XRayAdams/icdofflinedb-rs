@@ -1,0 +1,48 @@
+title: ICD Offline Database
+name: icdofflinedb
+version: 2.0.2+12
+summary: ICD Offline Database
+description: ICD Offline Database is a free and open-source application that allows users to search through the entire ICD-10 and ICD-9 databases of codes.
+contact: xrayadamo@gmail.com
+icon: snap/gui/app.rayadams.icdofflinedb.png
+confinement: strict
+base: core24
+grade: stable
+license: MIT
+source-code: https://github.com/XRayAdams/icdofflinedb-rs
+website: https://www.rayadams.app
+issues: https://github.com/XRayAdams/icdofflinedb-rs/issues
+
+platforms:
+  amd64:
+  arm64:
+
+apps:
+  icdofflinedb:
+    command: bin/icdofflinedb
+    extensions: [gnome]
+    common-id: app.rayadams.icdofflinedb
+    plugs:
+      - network
+      - desktop
+      - desktop-legacy
+      - wayland
+      - x11
+
+parts:
+  icdofflinedb:
+    plugin: rust
+    source: .
+    rust-channel: stable
+    build-packages:
+      - pkg-config
+      - libgtk-4-dev
+      - libadwaita-1-dev
+      - libsqlite3-0
+      - libsqlite3-dev
+
+  assets:
+    plugin: dump
+    source: assets
+    organize:
+      '*': assets/

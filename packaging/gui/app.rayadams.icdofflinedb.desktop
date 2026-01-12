@@ -1,0 +1,14 @@
+[Desktop Entry]
+Version=2.0.2+12
+Name=ICD Offline Database
+GenericName=ICD Offline Database
+Comment=ICD Offline Database is a free and open-source application that allows users to search through the entire ICD-10 and ICD-9 databases of codes.
+Terminal=false
+Type=Application
+Categories=Utility;
+Keywords=Number, Text, Converter;
+StartupWMClass=app.rayadams.icdofflinedb
+
+Exec=/usr/local/lib/icdofflinedb/icdofflinedb
+TryExec=/usr/local/lib/icdofflinedb/icdofflinedb
+Icon=app.rayadams.icdofflinedb
