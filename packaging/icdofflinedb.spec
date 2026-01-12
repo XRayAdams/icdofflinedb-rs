@@ -1,6 +1,6 @@
 %define _name icdofflinedb
 %define _version 2.0.2
-%define _release 12
+%define _release 23
 %define debug_package %{nil}
 
 Name: %{_name}
