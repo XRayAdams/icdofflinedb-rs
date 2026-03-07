@@ -2,10 +2,15 @@
 <component type="desktop">
   <id>icdofflinedb.desktop</id>
   <metadata_license>CC0-1.0</metadata_license>
+  <project_license>MIT</project_license>
   <name>ICD Offline Database</name>
   <summary>ICD Offline Database is a free and open-source application that allows users to search through the entire ICD-10 and ICD-9 databases of codes.</summary>
   <url type="homepage">https://github.com/XRayAdams/icdofflinedb</url>
-  <content_rating type="oars-1.1"><category>Age 3+</category></content_rating>
+  <content_rating type="oars-1.1"/>
+  <launchable type="desktop-id">app.rayadams.icdofflinedb.desktop</launchable>
+  <developer id="app.rayadams">
+    <name translate="no">Konstantin Asamov</name>
+  </developer>
   <screenshots>
     <screenshot type="default">
       <image>https://raw.githubusercontent.com/XRayAdams/icdofflinedb-rs/refs/heads/master/screenshots/screenshot01.png</image>

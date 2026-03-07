@@ -1,0 +1,37 @@
+# Maintainer: Konstantin Adamov <xrayadamo@gmail.com>
+pkgname=icdofflinedb
+pkgver=2.1.3
+pkgrel=25
+pkgdesc="ICD Offline Database is a free and open-source application that allows users to search through the entire ICD-10 and ICD-9 databases of codes."
+arch=('x86_64' 'aarch64')
+url="https://github.com/XRayAdams/icdofflinedb-rs"
+license=('MIT')
+depends=('gtk4' 'libadwaita' 'glibc' 'gcc-libs' 'sqlite')
+makedepends=('cargo' 'gettext' 'glib2')
+
+build() {
+  cd "$startdir"
+  cargo build --release --locked --target-dir=target
+}
+
+package() {
+  cd "$startdir"
+  
+  # Main executable
+  install -Dm755 "target/release/${pkgname}" "${pkgdir}/usr/bin/${pkgname}"
+
+  # Database file
+  install -Dm644 "assets/icddb.db" -t "${pkgdir}/usr/share/${pkgname}/"
+
+  # Desktop file
+  install -Dm644 "packaging/gui/app.rayadams.icdofflinedb.desktop" -t "${pkgdir}/usr/share/applications/"
+  
+  # Icon
+  install -Dm644 "packaging/gui/app.rayadams.icdofflinedb.png" "${pkgdir}/usr/share/icons/hicolor/512x512/apps/app.rayadams.icdofflinedb.png"
+  
+  # Metainfo
+  install -Dm644 "packaging/app.rayadams.icdofflinedb.metainfo.xml" -t "${pkgdir}/usr/share/metainfo/"
+  
+    # License
+  install -Dm644 "LICENSE" -t "${pkgdir}/usr/share/licenses/${pkgname}/"
+}

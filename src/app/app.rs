@@ -120,10 +120,10 @@ impl App {
                     return local_db;
                 }
 
-                // 2. Standard Linux install: ../share/icdofflinedb/assets
+                // 2. Standard Linux install: ../share/icdofflinedb/icddb.db
                 // (assuming binary is in /usr/bin or /usr/local/bin)
                 if let Some(prefix) = exe_dir.parent() {
-                    let system_db = prefix.join("share").join("icdofflinedb").join("assets").join("icddb.db");
+                    let system_db = prefix.join("share").join("icdofflinedb").join("icddb.db");
                     if system_db.exists() {
                         return system_db;
                     }

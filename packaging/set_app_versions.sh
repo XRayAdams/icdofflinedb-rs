@@ -7,13 +7,12 @@ echo "Setting app version in all relevant files..."
 # --- Configuration ---
 CARGO_FILE="Cargo.toml"
 DEBIAN_CONTROL_FILE="packaging/control"
-DEBIAN_DESKTOP_FILE="packaging/gui/app.rayadams.icdofflinedb.desktop"
 SNAP_YAML_FILE="snap/snapcraft.yaml"
 SNAP_DESKTOP_FILE="snap/gui/icdofflinedb.desktop"
 RPM_FILE="packaging/icdofflinedb.spec"
 MACHINE_ARCH=$(uname -m)
 DEBIAN_CONTROL_FILE_ARCH="amd64"
-
+AUR_CONTROL_FILE="packaging/PKGBUILD"
 if [ "$MACHINE_ARCH" == "aarch64" ]; then
     MACHINE_ARCH="arm64"
     DEBIAN_CONTROL_FILE_ARCH="arm64"
@@ -34,10 +33,6 @@ if [ ! -f "$DEBIAN_CONTROL_FILE" ]; then
     echo "Error: File not found: $DEBIAN_CONTROL_FILE"
     exit 1
 fi
-if [ ! -f "$DEBIAN_DESKTOP_FILE" ]; then
-    echo "Error: File not found: $DEBIAN_DESKTOP_FILE"
-    exit 1
-fi
 if [ ! -f "$SNAP_YAML_FILE" ]; then
     echo "Error: File not found: $SNAP_YAML_FILE"
     exit 1
@@ -48,6 +43,10 @@ if [ ! -f "$SNAP_DESKTOP_FILE" ]; then
 fi
 if [ ! -f "$RPM_FILE" ]; then
     echo "Error: File not found: $RPM_FILE"
+    exit 1
+fi
+if [ ! -f "$AUR_CONTROL_FILE" ]; then
+    echo "Error: File not found: $AUR_CONTROL_FILE"
     exit 1
 fi
 
@@ -70,13 +69,15 @@ APP_BUILD=$(echo "$APP_VERSION" | cut -d'+' -f2)
 sed -i "s/^\(\s*Version:\s*\).*\$/\1$APP_VERSION/" "$DEBIAN_CONTROL_FILE"
 sed -i "s/^\(\s*Architecture:\s*\).*\$/\1$DEBIAN_CONTROL_FILE_ARCH/" "$DEBIAN_CONTROL_FILE"
 
-sed -i "s/^\(\s*Version=\s*\).*\$/\1$APP_VERSION/" "$DEBIAN_DESKTOP_FILE"
-
 sed -i "s/^\(\s*version:\s*\).*\$/\1$APP_VERSION/" "$SNAP_YAML_FILE"
 sed -i "s/^\(\s*Version=\s*\).*\$/\1$APP_VERSION/" "$SNAP_DESKTOP_FILE"
 
 # Update version in RPM spec file
 sed -i "s/^\(\s*%define _version \s*\).*\$/\1$APP_VERSION_SHORT/" "$RPM_FILE"
 sed -i "s/^\(\s*%define _release \s*\).*\$/\1$APP_BUILD/" "$RPM_FILE"
+
+# Update version in AUR PKGBUILD
+sed -i "s/^\(\s*pkgver=\).*\$/\1$APP_VERSION_SHORT/" "$AUR_CONTROL_FILE"
+sed -i "s/^\(\s*pkgrel=\).*\$/\1$APP_BUILD/" "$AUR_CONTROL_FILE"
 
 echo "Successfully updated version to $APP_VERSION in all relevant files."
