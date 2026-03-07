@@ -1,6 +1,6 @@
 %define _name icdofflinedb
-%define _version 2.0.2
-%define _release 23
+%define _version 2.1.3
+%define _release 25
 %define debug_package %{nil}
 
 Name: %{_name}
@@ -24,40 +24,42 @@ Requires: gtk3, libstdc++, sqlite-libs, sqlite-devel
 ICD Offline Database is a free and open-source application that allows users to search through the entire ICD-10 and ICD-9 databases of codes.
 
 %prep
-%setup -q -n release
+%setup -q
 
 %build
-# This section is intentionally left blank as we are packaging a pre-compiled Flutter application.
+# This section is intentionally left blank as we are packaging a pre-compiled application.
 
 %install
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/bin
 mkdir -p %{buildroot}/usr/share/applications
-mkdir -p %{buildroot}/usr/share/icons/hicolor/256x256/apps
-mkdir -p %{buildroot}/opt/%{_name}
+mkdir -p %{buildroot}/usr/share/icons/hicolor/512x512/apps
+mkdir -p %{buildroot}/usr/share/%{_name}
 mkdir -p %{buildroot}%{_datadir}/metainfo
 
-# Copy the application files
-cp -r ./* %{buildroot}/opt/%{_name}/
+# Copy the application binary
+install -m 755 %{_name} %{buildroot}/usr/bin/%{_name}
 
-# Create a symlink in /usr/bin
-ln -s /opt/%{_name}/%{_name} %{buildroot}/usr/bin/%{_name}
+# Copy the database
+install -m 644 assets/icddb.db %{buildroot}/usr/share/%{_name}/icddb.db
 
 # Copy the desktop file
-install -m 644 %{SOURCE1} %{buildroot}/usr/share/applications/%{_name}.desktop
+install -m 644 %{SOURCE1} %{buildroot}/usr/share/applications/app.rayadams.icdofflinedb.desktop
 
 # Copy the application icon
-install -m 644 %{SOURCE2} %{buildroot}/usr/share/icons/hicolor/256x256/apps/%{_name}.png
+install -m 644 %{SOURCE2} %{buildroot}/usr/share/icons/hicolor/512x512/apps/app.rayadams.icdofflinedb.png
 
 # Copy meta info
-install -m 644 %{SOURCE3} %{buildroot}%{_datadir}/metainfo/%{name}.metainfo.xml
+install -m 644 %{SOURCE3} %{buildroot}%{_datadir}/metainfo/app.rayadams.icdofflinedb.metainfo.xml
+
 %files
 /usr/bin/%{_name}
-/opt/%{_name}
-/usr/share/applications/%{_name}.desktop
-/usr/share/icons/hicolor/256x256/apps/%{_name}.png
-%{_datadir}/metainfo/%{name}.metainfo.xml
+%dir /usr/share/%{_name}
+/usr/share/%{_name}/icddb.db
+/usr/share/applications/app.rayadams.icdofflinedb.desktop
+/usr/share/icons/hicolor/512x512/apps/app.rayadams.icdofflinedb.png
+%{_datadir}/metainfo/app.rayadams.icdofflinedb.metainfo.xml
 
 %changelog
 *loghere
-- Initial RPM release
+- Updating location of DB file

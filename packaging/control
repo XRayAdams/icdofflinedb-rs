@@ -1,5 +1,5 @@
 Package: icdofflinedb
-Version: 2.0.2+23
+Version: 2.1.3+25
 Architecture: amd64
 Priority: optional
 Depends: libsqlite3-0, libsqlite3-dev

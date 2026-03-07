@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<gresources>
+  <gresource prefix="/app/rayadams/icdofflinedb">
+    <file compressed="true">assets/app.rayadams.icdofflinedb.png</file>
+  </gresource>
+</gresources>
