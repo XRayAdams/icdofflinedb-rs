@@ -30,10 +30,17 @@ apps:
       - x11
 
 parts:
+  rust-deps:
+    plugin: nil
+    build-packages:
+      - curl
+    override-pull: |
+      curl https://sh.rustup.rs -sSf | sh -s -- -y --default-toolchain stable --profile minimal
+
   icdofflinedb:
     plugin: rust
     source: .
-    rust-channel: stable
+    rust-channel: none
     build-packages:
       - pkg-config
       - libgtk-4-dev
