@@ -1,6 +1,6 @@
 %define _name icdofflinedb
-%define _version 2.1.3
-%define _release 25
+%define _version 2.1.4
+%define _release 26
 %define debug_package %{nil}
 
 Name: %{_name}
@@ -17,11 +17,13 @@ Source0: %{_name}-%{_version}.tar.gz
 Source1: app.rayadams.icdofflinedb.desktop
 Source2: app.rayadams.icdofflinedb.png
 Source3: app.rayadams.icdofflinedb.metainfo.xml
+Source4: README.txt
 
-Requires: gtk3, libstdc++, sqlite-libs, sqlite-devel
+Requires: gtk4
 
 %description
-ICD Offline Database is a free and open-source application that allows users to search through the entire ICD-10 and ICD-9 databases of codes.
+ICD Offline Database is a free and open-source application that allows
+users to search through the entire ICD-10 and ICD-9 databases of codes.
 
 %prep
 %setup -q
@@ -52,6 +54,9 @@ install -m 644 %{SOURCE2} %{buildroot}/usr/share/icons/hicolor/512x512/apps/app.
 # Copy meta info
 install -m 644 %{SOURCE3} %{buildroot}%{_datadir}/metainfo/app.rayadams.icdofflinedb.metainfo.xml
 
+# Copy documentation
+install -Dm 644 %{SOURCE4} %{buildroot}%{_docdir}/%{_name}/README.txt
+
 %files
 /usr/bin/%{_name}
 %dir /usr/share/%{_name}
@@ -59,6 +64,7 @@ install -m 644 %{SOURCE3} %{buildroot}%{_datadir}/metainfo/app.rayadams.icdoffli
 /usr/share/applications/app.rayadams.icdofflinedb.desktop
 /usr/share/icons/hicolor/512x512/apps/app.rayadams.icdofflinedb.png
 %{_datadir}/metainfo/app.rayadams.icdofflinedb.metainfo.xml
+%doc %{_docdir}/%{_name}/README.txt
 
 %changelog
 *loghere

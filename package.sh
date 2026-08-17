@@ -26,6 +26,7 @@ APP_VERSION_LONG=$(grep -E '^\s*version = ' "$CARGO_FILE" | head -n1 | cut -d ' 
 APP_VERSION=$(echo "$APP_VERSION_LONG" | cut -d'+' -f1)
 APP_BUILD=$(echo "$APP_VERSION_LONG" | cut -d'+' -f2)
 
+strip target/release/"$APP_NAME"
 
 # Set app versions to all files for packaging
 packaging/set_app_versions.sh
@@ -84,6 +85,7 @@ sed "s/^*loghere$/* $CHANGE_DATE/" "packaging/$APP_NAME.spec" > "$RPM_BUILD_ROOT
 cp "packaging/gui/$APP_ID.desktop" "$RPM_BUILD_ROOT/SOURCES/"
 cp packaging/gui/"$APP_ID".png "$RPM_BUILD_ROOT/SOURCES/"
 cp packaging/"$APP_ID".metainfo.xml "$RPM_BUILD_ROOT/SOURCES/"
+cp packaging/README.txt "$RPM_BUILD_ROOT/SOURCES/"
 
 # Package the application files into a tarball
 TMP_TAR_DIR="$RPM_BUILD_ROOT/SOURCES/$APP_NAME-$APP_VERSION"
