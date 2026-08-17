@@ -39,6 +39,7 @@ parts:
 
   icdofflinedb:
     plugin: rust
+    after: [rust-deps]
     source: .
     rust-channel: none
     build-packages:
